@@ -1,0 +1,5 @@
+"use client";
+import { useState } from "react";
+import { ArticleCard } from "../../components/ArticleCard";
+import { articles } from "../../lib/articles";
+export function SearchClient() { const [query, setQuery] = useState(""); const q = query.toLowerCase(); const results = q ? articles.filter(a => `${a.headline} ${a.excerpt} ${a.category} ${a.tags.join(" ")}`.toLowerCase().includes(q)) : []; return <div className="page-shell wrap search-page"><header className="category-header"><span className="eyebrow">The Chnnl archive</span><h1>Search stories</h1><label htmlFor="site-search">Search by topic, platform or business model</label><input id="site-search" type="search" value={query} onChange={e => setQuery(e.target.value)} placeholder="Try “TikTok Shop” or “brands”" /></header>{query && <section><div className="section-head"><h2>{results.length} result{results.length === 1 ? "" : "s"}</h2></div>{results.length ? <div className="article-grid">{results.map(a => <ArticleCard key={a.id} article={a} />)}</div> : <p className="empty-state">No stories match that search yet. Try a broader topic.</p>}</section>}</div> }
