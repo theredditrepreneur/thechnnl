@@ -8,7 +8,7 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "typegen": "sanity schema extract && sanity typegen generate",
-    "seed": "node scripts/seed.mjs"
+    "seed": "sanity exec scripts/seed.mjs --with-user-token"
   },
   "dependencies": {
     "@sanity/icons": "^5.2.1",

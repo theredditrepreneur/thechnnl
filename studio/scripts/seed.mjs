@@ -1,12 +1,16 @@
 import {createClient} from '@sanity/client'
+import {getCliClient} from 'sanity/cli'
 import {createReadStream} from 'node:fs'
 import {dirname, resolve} from 'node:path'
 import {fileURLToPath} from 'node:url'
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID
 const token = process.env.SANITY_API_WRITE_TOKEN
-if (!projectId || !token) throw new Error('Set SANITY_STUDIO_PROJECT_ID and SANITY_API_WRITE_TOKEN before seeding.')
-const client = createClient({projectId, dataset: process.env.SANITY_STUDIO_DATASET || 'production', apiVersion: '2026-08-29', token, useCdn: false})
+if (!projectId) throw new Error('Set SANITY_STUDIO_PROJECT_ID before seeding.')
+const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
+const client = token
+  ? createClient({projectId, dataset, apiVersion: '2026-08-29', token, useCdn: false})
+  : getCliClient({apiVersion: '2026-08-29', dataset})
 const scriptDirectory = dirname(fileURLToPath(import.meta.url))
 const logoAsset = await client.assets.upload('image', createReadStream(resolve(scriptDirectory, '../../public/brand/the-chnnl-banner.jpg')), {filename: 'the-chnnl-banner.jpg'})
 const faviconAsset = await client.assets.upload('image', createReadStream(resolve(scriptDirectory, '../../public/favicon.jpg')), {filename: 'the-chnnl-favicon.jpg'})
