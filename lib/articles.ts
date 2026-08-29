@@ -8,7 +8,7 @@ export type BodyBlock =
 export type Article = {
   id: string; slug: string; headline: string; excerpt: string; standfirst: string;
   category: Category; author: string; publishedAt: string; featuredImage: string;
-  featured?: boolean; body: BodyBlock[]; tags: string[];
+  featured?: boolean; body: BodyBlock[] | Record<string, unknown>[]; tags: string[]; featuredImageAlt?: string;
 };
 
 const sharedBody: BodyBlock[] = [

@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+**/node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -30,6 +31,10 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+!studio/.env.example
+studio/dist/
+studio/.sanity/
 
 # vercel
 .vercel
@@ -38,3 +43,5 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /work/
+/.site-package-*/
+/the-chnnl-site.tar.gz

@@ -1,7 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Article, formatDate } from "../lib/articles";
 
 export function StoryArt({ variant, priority = false }: { variant: string; priority?: boolean }) {
+  if (variant.startsWith("http")) return <div className="story-art story-photo"><Image src={variant} alt="Editorial story image" fill sizes="(max-width: 700px) 100vw, 50vw" priority={priority} /></div>;
   return <div className={`story-art art-${variant}`} role="img" aria-label="Abstract editorial artwork" data-priority={priority}><span className="art-label">THE CHNNL / FIELD NOTE</span><b>{variant === "signal" ? "BUY / WATCH / BUILD" : variant.toUpperCase()}</b><i /></div>;
 }
 export function ArticleCard({ article, compact = false }: { article: Article; compact?: boolean }) {

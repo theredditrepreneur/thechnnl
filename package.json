@@ -14,7 +14,10 @@
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
+    "@portabletext/react": "^8.0.1",
+    "@sanity/image-url": "^2.1.1",
     "drizzle-orm": "0.45.2",
+    "next-sanity": "^13.3.3",
     "react": "19.2.6",
     "react-dom": "19.2.6"
   },
