@@ -46,7 +46,10 @@ export const getLatestArticles = (limit = 6) => getAllArticles().slice(0, limit)
 export const getArticlesByCategory = (category: string) => getAllArticles().filter(a => a.category.toLowerCase() === category.toLowerCase());
 export const getArticleBySlug = (slug: string) => articles.find(a => a.slug === slug);
 export const getRelatedArticles = (article: Article, limit = 3) => articles.filter(a => a.id !== article.id && (a.category === article.category || a.tags.some(t => article.tags.includes(t)))).slice(0, limit);
-export const formatDate = (date: string) => new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }).format(new Date(`${date}T12:00:00Z`));
+export const formatDate = (date: string) => {
+  const parsed = new Date(date.includes("T") ? date : `${date}T12:00:00Z`);
+  return new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }).format(parsed);
+};
 
 export const categoryDescriptions: Record<string, string> = {
   latest: "The latest reporting and analysis from across the creator economy.",
