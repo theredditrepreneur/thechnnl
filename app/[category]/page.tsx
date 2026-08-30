@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArticleCard, StoryArt } from "../../components/ArticleCard";
 import {categoryDescriptions} from "../../lib/articles";
@@ -15,7 +14,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
   const items = await getContentByCategory(category);
   const [featured, ...rest] = items;
   return <div className="page-shell wrap"><header className="category-header"><span className="eyebrow">The Chnnl / Channel</span><h1>{title}</h1><p>{info?.description || categoryDescriptions[category]}</p></header>
-    {featured && <section className="category-feature"><Link href={`/articles/${featured.slug}`}><StoryArt variant={featured.featuredImage} /></Link><div><span className="eyebrow">Featured story</span><h2><Link href={`/articles/${featured.slug}`}>{featured.headline}</Link></h2><p>{featured.excerpt}</p><Link className="text-link" href={`/articles/${featured.slug}`}>Read the story →</Link></div></section>}
+    {featured && <section className="category-feature"><a href={`/articles/${featured.slug}`}><StoryArt variant={featured.featuredImage} /></a><div><span className="eyebrow">Featured story</span><h2><a href={`/articles/${featured.slug}`}>{featured.headline}</a></h2><p>{featured.excerpt}</p><a className="text-link" href={`/articles/${featured.slug}`}>Read the story →</a></div></section>}
     <section className="section"><div className="section-head"><h2>More from {title}</h2><span className="result-count">{rest.length} stories</span></div><div className="article-grid">{rest.map(a => <ArticleCard key={a.id} article={a} />)}</div><nav className="pagination" aria-label="Pagination"><span>Page 1 of 1</span><button disabled>Previous</button><button disabled>Next</button></nav></section>
   </div>;
 }

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import { Article, formatDate } from "../lib/articles";
 
@@ -8,9 +7,9 @@ export function StoryArt({ variant, priority = false }: { variant: string; prior
 }
 export function ArticleCard({ article, compact = false }: { article: Article; compact?: boolean }) {
   return <article className={`story-card ${compact ? "compact" : ""}`}>
-    {!compact && <Link href={`/articles/${article.slug}`} aria-label={article.headline}><StoryArt variant={article.featuredImage} /></Link>}
-    <div className="story-meta"><Link href={`/${article.category.toLowerCase()}`}>{article.category}</Link><time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time></div>
-    <h3><Link href={`/articles/${article.slug}`}>{article.headline}</Link></h3>
+    {!compact && <a href={`/articles/${article.slug}`} aria-label={article.headline}><StoryArt variant={article.featuredImage} /></a>}
+    <div className="story-meta"><a href={`/${article.category.toLowerCase()}`}>{article.category}</a><time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time></div>
+    <h3><a href={`/articles/${article.slug}`}>{article.headline}</a></h3>
     <p>{article.excerpt}</p>
   </article>;
 }
