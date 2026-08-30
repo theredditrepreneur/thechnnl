@@ -12,7 +12,8 @@ export const defaultHome: HomeContent = {eyebrow: 'Independent creator economy i
 async function fetchOrFallback<T>(query: string, fallback: T, params: Record<string, unknown> = {}): Promise<T> {
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
   const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
-  if (!projectId) return fallback
+  const sanityEnabled = process.env.NEXT_PUBLIC_SANITY_ENABLED === 'true'
+  if (!projectId || !sanityEnabled) return fallback
   try {
     const url = new URL(`https://${projectId}.apicdn.sanity.io/v2026-08-29/data/query/${dataset}`)
     url.searchParams.set('query', query)
